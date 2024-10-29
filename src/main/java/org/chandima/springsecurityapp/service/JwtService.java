@@ -25,6 +25,8 @@ public class JwtService {
         secretKey = generateSecretKey();
     }
 
+
+    // This will generate the secretKey
     public String generateSecretKey() {
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
@@ -44,7 +46,7 @@ public class JwtService {
                 .claims(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000*60))
+                .expiration(new Date(System.currentTimeMillis() + 1000*60))  // 1 minute expiration
                 .signWith(getKey(), Jwts.SIG.HS256).compact();
 
 

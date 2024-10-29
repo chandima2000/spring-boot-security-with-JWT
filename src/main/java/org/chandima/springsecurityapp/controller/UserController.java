@@ -33,10 +33,13 @@ public class UserController {
     @PostMapping("login")
     public String login(@RequestBody User user){
 
+        // Check the username and password is correct or not
         Authentication authentication = authenticationManager
                 .authenticate( new UsernamePasswordAuthenticationToken(user.getUsername(),
                         user.getPassword()));
 
+
+        // If username and password is correct, then generate the token
         if(authentication.isAuthenticated()){
             return jwtService.generateToken(user.getUsername());
         }
